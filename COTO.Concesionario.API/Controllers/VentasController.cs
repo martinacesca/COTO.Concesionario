@@ -8,5 +8,11 @@ namespace COTO.Concesionario.API.Controllers
     {
         private readonly ILogger<VentasController> _logger = logger;
 
+        [HttpGet]
+        public IActionResult Get()
+        {
+            _logger.LogInformation("Get ventas");
+            return Ok();
+        }
     }
 }
