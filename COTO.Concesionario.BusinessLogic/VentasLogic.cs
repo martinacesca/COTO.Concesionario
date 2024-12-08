@@ -1,15 +1,21 @@
 ﻿using COTO.Concesionario.Interfaces.Access;
 using COTO.Concesionario.Interfaces.DTO;
 using COTO.Concesionario.Interfaces.Logic;
-using System.Data;
+using COTO.Concesionario.Interfaces.Request;
 
 namespace COTO.Concesionario.BusinessLogic
 {
     public class VentasLogic(IVentasAccess ventasAccess) : IVentasLogic
     {
-        public VentaDTO? AgregarVenta(VentaDTO venta)
+        public VentaDTO? AgregarVenta(RequestCrearVenta venta)
         {
-            var ventaCreada = ventasAccess.AgregarVenta(venta);
+            var ventaDto = new VentaDTO
+            {
+                Centro = new CentroDTO(venta.Centro),
+                Coche = CocheDTO.CrearCoche(venta.TipoCoche),
+            };
+
+            var ventaCreada = ventasAccess.AgregarVenta(ventaDto);
             return ventaCreada;
         }
 

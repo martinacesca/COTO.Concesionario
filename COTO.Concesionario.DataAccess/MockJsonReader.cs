@@ -29,18 +29,19 @@ namespace COTO.Concesionario.DataAccess
 
         private readonly ILogger _logger = logger;
 
+        private string RutaArchivo = Path.Combine(AppContext.BaseDirectory, VENTAS_FILE_NAME);
+        
         private void CargarVentas()
         {
             try
             {
-                var archivo = Path.Combine(AppContext.BaseDirectory, VENTAS_FILE_NAME);
-                if (File.Exists(archivo))
+                if (File.Exists(RutaArchivo))
                 {
                     var options = new JsonSerializerOptions();
                     options.Converters.Add(new CentroDtoJsonConverter());
                     options.Converters.Add(new CocheDtoJsonConverter());
 
-                    Ventas = JsonSerializer.Deserialize<List<VentaDTO>>(File.ReadAllText(archivo), options) ?? new List<VentaDTO>();
+                    Ventas = JsonSerializer.Deserialize<List<VentaDTO>>(File.ReadAllText(RutaArchivo), options) ?? new List<VentaDTO>();
                 }
             }
             catch (Exception ex)
@@ -48,6 +49,17 @@ namespace COTO.Concesionario.DataAccess
                 _logger.Error(ex, "Error al leer el archivo de ventas");
                 throw;
             }
+        }
+
+        public void GuardarVentas()
+        {
+            var options = new JsonSerializerOptions();
+            //options.Converters.Add(new CentroDtoJsonConverter());
+            //options.Converters.Add(new CocheDtoJsonConverter());
+
+            var jsonVentas = JsonSerializer.Serialize(Ventas, options);
+
+            File.WriteAllText(RutaArchivo, jsonVentas);        
         }
     }
 }

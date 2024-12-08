@@ -1,5 +1,6 @@
 using COTO.Concesionario.Interfaces.DTO;
 using COTO.Concesionario.Interfaces.Logic;
+using COTO.Concesionario.Interfaces.Request;
 using Microsoft.AspNetCore.Mvc;
 
 namespace COTO.Concesionario.API.Controllers
@@ -11,6 +12,20 @@ namespace COTO.Concesionario.API.Controllers
         IVentasLogic ventasLogic) : ControllerBase
     {
         private readonly ILogger<VentasController> _logger = logger;
+
+        [HttpPost]
+        public IActionResult PostVenta([FromBody] RequestCrearVenta venta)
+        {
+            try
+            { 
+                var ventaCreada = ventasLogic.AgregarVenta(venta);
+                return Ok(ventaCreada);
+            }
+            catch(InvalidDataException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<VentaDTO>))]

@@ -5,6 +5,7 @@
         public SuvDTO()
         {
             Precio = PRECIO_SUV;
+            TipoCoche = Enum.TipoCoche.Suv;
         }
     }
 }

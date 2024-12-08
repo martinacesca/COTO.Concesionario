@@ -6,14 +6,14 @@ namespace COTO.Concesionario.DataAccess
 {
     public class VentasAccess(IReader reader) : IVentasAccess
     {
-        public VentaDTO? AgregarVenta(VentaDTO venta)
+        public VentaDTO AgregarVenta(VentaDTO venta)
         {
-            if (reader.Ventas != null)
-            { 
-                reader.Ventas.Add(venta);
-                return venta;
-            }
-            return null;
+            venta.Id = reader.Ventas.Max(v => v.Id) + 1;
+
+            reader.Ventas.Add(venta);
+            reader.GuardarVentas();
+
+            return venta;
         }
 
         public IEnumerable<VentaDTO> GetVentas()

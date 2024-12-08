@@ -1,5 +1,4 @@
 ﻿using COTO.Concesionario.Interfaces.DTO;
-using COTO.Concesionario.Interfaces.Enum;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -12,19 +11,7 @@ namespace COTO.Concesionario.DataAccess
             using (JsonDocument document = JsonDocument.ParseValue(ref reader))
             {
                 var tipoCentroJson = document.RootElement.GetProperty("Locacion").ToString();
-                try
-                {
-                    var tipoCentro = (Centro)Enum.Parse(typeof(Centro), tipoCentroJson);
-
-                    return new CentroDTO
-                    {
-                        Locacion = tipoCentro.ToString()
-                    };
-                }
-                catch (Exception)
-                {
-                    throw new JsonException($"Tipo de centro '{tipoCentroJson}' no valido");
-                }
+                return new CentroDTO(tipoCentroJson);
             }
 
         }

@@ -6,7 +6,7 @@
         {
             PorcentajeImpuesto = IMPUESTO_SPORT;
             Precio = PRECIO_SPORT;
+            TipoCoche = Enum.TipoCoche.Sport;
         }
-
     }
 }

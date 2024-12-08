@@ -5,6 +5,7 @@
         public SedanDTO()
         {
             Precio = PRECIO_SEDAN;
+            TipoCoche = Enum.TipoCoche.Sedan;
         }
     }
 }

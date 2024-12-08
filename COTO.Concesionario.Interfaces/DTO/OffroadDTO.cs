@@ -5,6 +5,7 @@
         public OffroadDTO()
         {
             Precio = PRECIO_OFFROAD;
+            TipoCoche = Enum.TipoCoche.Offroad;
         }
     }
 }
