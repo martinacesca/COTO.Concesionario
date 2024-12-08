@@ -1,0 +1,38 @@
+[
+  {
+    "Id": 1,
+    "Centro": {
+      "Locacion": "Palermo"
+    },
+    "Coche": {
+      "TipoCoche": "Suvv"
+    }
+  },
+  {
+    "Id": 2,
+    "Centro": {
+      "Locacion": "Belgrano"
+    },
+    "Coche": {
+      "TipoCoche": "Offroad"
+    }
+  },
+  {
+    "Id": 3,
+    "Centro": {
+      "Locacion": "Boedo"
+    },
+    "Coche": {
+      "TipoCoche": "Sedan"
+    }
+  },
+  {
+    "Id": 4,
+    "Centro": {
+      "Locacion": "VillaCrespo"
+    },
+    "Coche": {
+      "TipoCoche": "Sport"
+    }
+  }
+]

@@ -4,6 +4,6 @@
     {
         public int Id { get; set; }
         public required CentroDTO Centro { get; set; }
-        public required CocheDTO CocheDTO { get; set; }
+        public required CocheDTO Coche { get; set; }
     }
 }

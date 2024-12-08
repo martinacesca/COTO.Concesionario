@@ -1,4 +1,6 @@
-﻿namespace COTO.Concesionario.Interfaces.DTO
+﻿using COTO.Concesionario.Interfaces.Enum;
+
+namespace COTO.Concesionario.Interfaces.DTO
 {
     public abstract class CocheDTO
     {
@@ -10,7 +12,6 @@
         public decimal IMPUESTO_SPORT = 0.07M;
         #endregion
 
-        public int Id { get; set; }
         public decimal Precio { get; set; }
         public decimal PorcentajeImpuesto { get; set; } = 0;
 
