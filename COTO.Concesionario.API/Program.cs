@@ -1,3 +1,4 @@
+using COTO.Concesionario.API.Middlewares;
 using COTO.Concesionario.Interfaces.Utils.Logger;
 using Serilog;
 
@@ -25,6 +26,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseMiddleware<MedidorTiempoEjecucionMiddleware>();
 
 app.MapControllers();
 
