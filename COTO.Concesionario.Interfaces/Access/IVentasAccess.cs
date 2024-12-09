@@ -4,7 +4,7 @@ namespace COTO.Concesionario.Interfaces.Access
 {
     public interface IVentasAccess
     {
-        VentaDTO? AgregarVenta(VentaDTO venta);
-        IEnumerable<VentaDTO> GetVentas();
+        Task<VentaDTO> AgregarVenta(VentaDTO venta);
+        Task<IEnumerable<VentaDTO>> GetVentas();
     }
 }

@@ -10,10 +10,4 @@
     <ProjectReference Include="..\COTO.Concesionario.Interfaces\COTO.Concesionario.Interfaces.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="ventas.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>

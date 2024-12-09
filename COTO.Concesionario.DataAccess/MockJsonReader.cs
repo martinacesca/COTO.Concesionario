@@ -9,29 +9,22 @@ namespace COTO.Concesionario.DataAccess
     {
         public const string VENTAS_FILE_NAME = "ventas.json";
 
-        private List<VentaDTO>? _ventas;
+        public List<VentaDTO>? Ventas { get; set; }
 
-        public List<VentaDTO> Ventas 
-        { 
-            get 
+        public async Task<List<VentaDTO>> GetVentas()
+        {
+            if (Ventas == null)
             {
-                if (_ventas == null)
-                {
-                    CargarVentas();
-                }
-                return _ventas!;
+                await CargarVentas();
             }
-            set 
-            {
-                _ventas = value;
-            }
+            return Ventas!;
         }
 
         private readonly ILogger _logger = logger;
 
-        private string RutaArchivo = Path.Combine(AppContext.BaseDirectory, VENTAS_FILE_NAME);
+        private string RutaArchivo = Path.Combine(VENTAS_FILE_NAME);
         
-        private void CargarVentas()
+        private async Task CargarVentas()
         {
             try
             {
@@ -41,7 +34,8 @@ namespace COTO.Concesionario.DataAccess
                     options.Converters.Add(new CentroDtoJsonConverter());
                     options.Converters.Add(new CocheDtoJsonConverter());
 
-                    Ventas = JsonSerializer.Deserialize<List<VentaDTO>>(File.ReadAllText(RutaArchivo), options) ?? new List<VentaDTO>();
+                    var contenidoArchivo = await File.ReadAllTextAsync(RutaArchivo);
+                    Ventas = JsonSerializer.Deserialize<List<VentaDTO>>(contenidoArchivo, options) ?? new List<VentaDTO>();
                 }
             }
             catch (Exception ex)
@@ -51,15 +45,12 @@ namespace COTO.Concesionario.DataAccess
             }
         }
 
-        public void GuardarVentas()
+        public async Task GuardarVentas()
         {
             var options = new JsonSerializerOptions();
-            //options.Converters.Add(new CentroDtoJsonConverter());
-            //options.Converters.Add(new CocheDtoJsonConverter());
-
             var jsonVentas = JsonSerializer.Serialize(Ventas, options);
 
-            File.WriteAllText(RutaArchivo, jsonVentas);        
+            await File.WriteAllTextAsync(RutaArchivo, jsonVentas);        
         }
     }
 }

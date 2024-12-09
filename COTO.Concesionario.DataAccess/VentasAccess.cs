@@ -6,19 +6,20 @@ namespace COTO.Concesionario.DataAccess
 {
     public class VentasAccess(IReader reader) : IVentasAccess
     {
-        public VentaDTO AgregarVenta(VentaDTO venta)
+        public async Task<VentaDTO> AgregarVenta(VentaDTO venta)
         {
-            venta.Id = reader.Ventas.Max(v => v.Id) + 1;
+            var ventas = await reader.GetVentas();
+            venta.Id = ventas.Max(v => v.Id) + 1;
 
-            reader.Ventas.Add(venta);
-            reader.GuardarVentas();
+            reader.Ventas?.Add(venta);
+            await reader.GuardarVentas();
 
             return venta;
         }
 
-        public IEnumerable<VentaDTO> GetVentas()
+        public async Task<IEnumerable<VentaDTO>> GetVentas()
         {
-            var ventas = reader.Ventas;
+            var ventas = await reader.GetVentas();
             return ventas;
         }
     }

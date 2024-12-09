@@ -40,5 +40,7 @@ namespace COTO.Concesionario.Interfaces.DTO
                 throw new InvalidDataException($"Tipo de coche '{coche}' no valido");
             }
         }
+
+        override public string ToString() => TipoCoche.ToString();
     }
 }

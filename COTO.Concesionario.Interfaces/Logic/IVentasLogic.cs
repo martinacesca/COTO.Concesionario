@@ -5,7 +5,11 @@ namespace COTO.Concesionario.Interfaces.Logic
 {
     public interface IVentasLogic
     {
-        VentaDTO? AgregarVenta(RequestCrearVenta venta);
-        IEnumerable<VentaDTO> GetVentas();
+        Task<VentaDTO> AgregarVenta(RequestCrearVenta venta);
+        Task<IEnumerable<VentaDTO>> GetVentas();
+        Task<VolumenVentasDTO> GetVolumenVentas();
+        Task<IList<string>> GetVolumenVentasPorCentro();
+        Task<IEnumerable<PorcentajeVentaDTO>> GetPorcentajesVentas(); 
+
     }
 }
