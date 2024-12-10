@@ -11,6 +11,7 @@ Incluye:
 - **Swagger** para documentación interactiva.
 - **Logs** detallados de errores y eventos.
 - **Datos mock** iniciales almacenados en un archivo JSON.
+- **Registros del tiempo de ejecución** que se pueden ver en los logs y en la ventana de output para monitoreo.
 
 ## Endpoints Disponibles
 
