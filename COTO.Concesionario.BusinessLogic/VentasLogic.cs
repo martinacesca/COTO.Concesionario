@@ -56,20 +56,21 @@ namespace COTO.Concesionario.BusinessLogic
         public async Task<IEnumerable<PorcentajeVentaDTO>> GetPorcentajesVentas()
         {
             var ventas = await ventasAccess.GetVentas();
-            var total = (decimal)ventas.Count();
             var porcentajes = new List<PorcentajeVentaDTO>();
 
 
-            var agrupados = ventas.GroupBy(v => v.Centro.Centro);
-            foreach (var centro in agrupados)
+            var agrupados = ventas.GroupBy(v => v.Coche.TipoCoche);
+            foreach (var tipoCoche in agrupados)
             {
                 var porcentajeVenta = new PorcentajeVentaDTO
                 {
-                    Centro = centro.Key,
-                    Porcentajes = centro.GroupBy(v => v.Coche.TipoCoche).Select(tc => new PorcentajeVentaDTO.PorcentajeVenta
+                    TipoCoche = tipoCoche.Key,
+                    Porcentajes = tipoCoche.GroupBy(v => v.Centro.Centro).Select(c => new PorcentajeVentaDTO.PorcentajeVenta
                     {
-                        TipoCoche = tc.Key,
-                        Porcentaje = (tc.Count() / total) * 100
+                        Centro = c.Key,
+                        Porcentaje = (c.Count() / (decimal)tipoCoche.Count()) * 100,
+                        PorcentajeFormateado = $"{(c.Count() / (decimal)tipoCoche.Count()) :0.#%}",
+                       
                     }),
                 };
                 porcentajes.Add(porcentajeVenta);
