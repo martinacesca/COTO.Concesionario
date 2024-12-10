@@ -3,6 +3,7 @@ using COTO.Concesionario.Interfaces.DTO;
 using COTO.Concesionario.Interfaces.Enum;
 using COTO.Concesionario.Interfaces.Logic;
 using COTO.Concesionario.Interfaces.Request;
+using System.Globalization;
 using System.Text;
 
 namespace COTO.Concesionario.BusinessLogic
@@ -13,12 +14,18 @@ namespace COTO.Concesionario.BusinessLogic
         {
             var ventaDto = new VentaDTO
             {
-                Centro = new CentroDTO(venta.Centro),
-                Coche = CocheDTO.CrearCoche(venta.TipoCoche),
+                Centro = new CentroDTO(ConvertToPascalCase(venta.Centro)),
+                Coche = CocheDTO.CrearCoche(ConvertToPascalCase(venta.TipoCoche)),
             };
 
             var ventaCreada = await ventasAccess.AgregarVenta(ventaDto);
             return ventaCreada;
+        }
+
+        private static string ConvertToPascalCase(string input)
+        {
+            TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
+            return textInfo.ToTitleCase(input).Replace(" ", "");
         }
 
         public async Task<IEnumerable<VentaDTO>> GetVentas()

@@ -56,6 +56,7 @@ namespace COTO.Concesionario.API.Controllers
         {
             try
             {
+                //Se optó por devolver un formato de texto descriptivo. Asumiendo que el cliente va a consumir de esta manera.
                 var volumen = await ventasLogic.GetVolumenVentas();
                 return Ok(volumen.ToString());
             }
@@ -73,7 +74,7 @@ namespace COTO.Concesionario.API.Controllers
         {
             try
             {
-                // se optó por devolver una lista de strings con los volumenes de ventas por centro a modo de reporte
+                //Se optó por devolver un formato de texto descriptivo. Asumiendo que el cliente va a consumir de esta manera.
                 var volumenes = await ventasLogic.GetVolumenVentasPorCentro();
                 return Ok(volumenes);
             }
@@ -91,7 +92,7 @@ namespace COTO.Concesionario.API.Controllers
         {
             try
             {
-                // se optó por devolver un objeto JSON con los porcentajes de ventas
+                //Se optó por devolver un JSON. Asumiendo que el cliente va a consumir de esta manera.
                 var porcentajes = await ventasLogic.GetPorcentajesVentas();
                 return Ok(porcentajes);
             }

@@ -9,7 +9,7 @@ namespace COTO.Concesionario.DataAccess
         public async Task<VentaDTO> AgregarVenta(VentaDTO venta)
         {
             var ventas = await reader.GetVentas();
-            venta.Id = ventas.Max(v => v.Id) + 1;
+            venta.Id = ventas.Count > 0 ? ventas.Max(v => v.Id) + 1 : 1;
 
             reader.Ventas?.Add(venta);
             await reader.GuardarVentas();
